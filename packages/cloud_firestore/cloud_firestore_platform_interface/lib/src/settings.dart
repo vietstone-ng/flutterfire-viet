@@ -17,6 +17,8 @@ class Settings {
     this.sslEnabled,
     this.cacheSizeBytes,
     this.ignoreUndefinedProperties = false,
+    this.experimentalForceLongPolling = false,
+    this.experimentalAutoDetectLongPolling = false,
   });
 
   /// Constant used to indicate the LRU garbage collection should be disabled.
@@ -52,6 +54,11 @@ class Settings {
   /// Web only.
   final bool ignoreUndefinedProperties;
 
+  // https://github.com/firebase/firebase-js-sdk/issues/1674
+  // https://github.com/firebase/flutterfire/issues/11149#issuecomment-1615133353
+  final bool experimentalForceLongPolling;
+  final bool experimentalAutoDetectLongPolling;
+
   /// Returns the settings as a [Map]
   Map<String, dynamic> get asMap {
     return {
@@ -60,6 +67,9 @@ class Settings {
       'sslEnabled': sslEnabled,
       'cacheSizeBytes': cacheSizeBytes,
       if (kIsWeb) 'ignoreUndefinedProperties': ignoreUndefinedProperties,
+      if (kIsWeb) 'experimentalForceLongPolling': experimentalForceLongPolling,
+      if (kIsWeb)
+        'experimentalAutoDetectLongPolling': experimentalAutoDetectLongPolling,
     };
   }
 
@@ -69,6 +79,8 @@ class Settings {
     bool? sslEnabled,
     int? cacheSizeBytes,
     bool? ignoreUndefinedProperties,
+    bool? experimentalForceLongPolling,
+    bool? experimentalAutoDetectLongPolling,
   }) {
     assert(
         cacheSizeBytes == null ||
@@ -84,6 +96,10 @@ class Settings {
       cacheSizeBytes: cacheSizeBytes ?? this.cacheSizeBytes,
       ignoreUndefinedProperties:
           ignoreUndefinedProperties ?? this.ignoreUndefinedProperties,
+      experimentalForceLongPolling:
+          experimentalForceLongPolling ?? this.experimentalForceLongPolling,
+      experimentalAutoDetectLongPolling: experimentalAutoDetectLongPolling ??
+          this.experimentalAutoDetectLongPolling,
     );
   }
 
@@ -95,7 +111,10 @@ class Settings {
       other.host == host &&
       other.sslEnabled == sslEnabled &&
       other.cacheSizeBytes == cacheSizeBytes &&
-      other.ignoreUndefinedProperties == ignoreUndefinedProperties;
+      other.ignoreUndefinedProperties == ignoreUndefinedProperties &&
+      other.experimentalForceLongPolling == experimentalForceLongPolling &&
+      other.experimentalAutoDetectLongPolling ==
+          experimentalAutoDetectLongPolling;
 
   @override
   int get hashCode => Object.hash(
@@ -105,6 +124,8 @@ class Settings {
         sslEnabled,
         cacheSizeBytes,
         ignoreUndefinedProperties,
+        experimentalForceLongPolling,
+        experimentalAutoDetectLongPolling,
       );
 
   @override
