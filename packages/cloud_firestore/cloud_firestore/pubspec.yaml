@@ -6,6 +6,8 @@ homepage: https://firebase.google.com/docs/firestore
 repository: https://github.com/firebase/flutterfire/tree/master/packages/cloud_firestore/cloud_firestore
 version: 4.15.5
 
+publish_to: none
+
 false_secrets:
   - example/**
   - dartpad/**
@@ -16,7 +18,11 @@ environment:
 
 dependencies:
   cloud_firestore_platform_interface: ^6.1.6
+  # cloud_firestore_platform_interface:
+  #   path: ../cloud_firestore_platform_interface
   cloud_firestore_web: ^3.10.5
+  # cloud_firestore_web:
+  #   path: ../cloud_firestore_web
   collection: ^1.0.0
   firebase_core: ^2.25.4
   firebase_core_platform_interface: ^5.0.0

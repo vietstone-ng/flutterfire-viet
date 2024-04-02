@@ -283,11 +283,19 @@ class FirebaseFirestore extends FirebasePluginPlatform {
   ///
   /// You must set these before invoking any other methods on this [FirebaseFirestore] instance.
   set settings(Settings settings) {
+    assert(
+      !(settings.experimentalAutoDetectLongPolling &&
+          settings.experimentalForceLongPolling),
+    );
     _delegate.settings = _delegate.settings.copyWith(
       sslEnabled: settings.sslEnabled,
       persistenceEnabled: settings.persistenceEnabled,
       host: settings.host,
       cacheSizeBytes: settings.cacheSizeBytes,
+      ignoreUndefinedProperties: settings.ignoreUndefinedProperties,
+      experimentalForceLongPolling: settings.experimentalForceLongPolling,
+      experimentalAutoDetectLongPolling:
+          settings.experimentalAutoDetectLongPolling,
     );
   }
 

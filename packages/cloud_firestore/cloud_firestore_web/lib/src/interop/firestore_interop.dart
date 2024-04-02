@@ -690,6 +690,8 @@ abstract class FirestoreSettings {
     JSString? host,
     JSBoolean? ssl,
     JSBoolean? ignoreUndefinedProperties,
+    JSBoolean? experimentalForceLongPolling,
+    JSBoolean? experimentalAutoDetectLongPolling,
     JSObject localCache,
   });
 }
@@ -707,6 +709,12 @@ extension FirestoreSettingsExtension on FirestoreSettings {
 
   //ignore: avoid_setters_without_getters
   external set ignoreUndefinedProperties(JSBoolean u);
+
+  //ignore: avoid_setters_without_getters
+  external set experimentalForceLongPolling(JSBoolean t);
+
+  //ignore: avoid_setters_without_getters
+  external set experimentalAutoDetectLongPolling(JSBoolean t);
 
   /// Specifies the cache used by the SDK.
   /// Available options are MemoryLocalCache and PersistentLocalCache, each with different configuration options.
